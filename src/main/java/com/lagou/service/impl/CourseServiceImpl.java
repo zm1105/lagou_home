@@ -26,4 +26,11 @@ public class CourseServiceImpl implements CourseService {
     List<Course> list = courseDao.findCourseNameAndStatus(name, status);
     return list;
   }
+
+  @Override
+  public Course findById(int id) {
+    CourseDao courseDao = new CourseDaoImpl();
+    return courseDao.findById(id);
+
+  }
 }

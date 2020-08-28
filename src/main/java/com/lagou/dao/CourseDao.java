@@ -24,4 +24,6 @@ public interface CourseDao {
    * @return
    */
   List<Course>findCourseNameAndStatus(String name,String status);
+
+  Course findById(int id);
 }

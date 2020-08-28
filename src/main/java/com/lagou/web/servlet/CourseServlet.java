@@ -50,6 +50,24 @@ public class CourseServlet extends BaseServlet {
     } catch (IOException e) {
       e.printStackTrace();
     }
+  }
+  /**
+   * 根据课程ID查询
+   */
+  public  void  ﬁndCourseById(HttpServletRequest request, HttpServletResponse response){
+
+    try {
+      String id = request.getParameter("id");
+
+      CourseService courseService = new CourseServiceImpl();
+      Course course = courseService.findById(Integer.parseInt(id));
+
+      String result = JSON.toJSONString(course);
+      response.getWriter().print(result);
+
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
 
   }
 }

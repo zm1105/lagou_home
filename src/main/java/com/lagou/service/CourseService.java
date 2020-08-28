@@ -11,6 +11,9 @@ import java.util.List;
 public interface CourseService {
   List<Course> findCourseList();
 
-  List<Course>findCourseNameAndStatus(String name,String status);
+  List<Course> findCourseNameAndStatus(String name, String status);
+
+  Course findById(int id);
+
 
 }

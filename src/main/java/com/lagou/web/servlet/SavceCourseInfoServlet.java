@@ -1,19 +1,15 @@
 package com.lagou.web.servlet;
 
 import com.lagou.base.Constants;
-import com.lagou.dao.SavceCourse;
-import com.lagou.dao.impl.SavceCourseImpl;
 import com.lagou.pojo.Course;
-import com.lagou.service.CourseService;
 import com.lagou.service.SavceCourseService;
-import com.lagou.service.impl.CourseServiceImpl;
 import com.lagou.service.impl.SavceCourseServiceImpl;
+import com.lagou.service.impl.updateCourseImpl;
+import com.lagou.service.updateCourse;
 import com.lagou.utils.DateUtils;
 import com.lagou.utils.UUIDUtils;
-import lombok.Value;
 import org.apache.commons.beanutils.BeanUtils;
 import org.apache.commons.fileupload.FileItem;
-import org.apache.commons.fileupload.FileUpload;
 import org.apache.commons.fileupload.FileUploadException;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
@@ -70,20 +66,30 @@ public class SavceCourseInfoServlet extends HttpServlet {
           IOUtils.copy(inputStream, outputStream);
           outputStream.close();
           inputStream.close();
-          map.put("course_img_url", Constants.LOCAL_URL+"/upload/" + newname);
+          map.put("course_img_url", Constants.LOCAL_URL + "/upload/" + newname);
         }
       }
 
       BeanUtils.populate(course, map);
-
       String dateFormart = DateUtils.getDateFormart();
-      course.setCreate_time(dateFormart);
-      course.setUpdate_time(dateFormart);
-      course.setStatus(1);
+      if (map.get("id") != null) {
+        //修改
+        course.setCreate_time(dateFormart);
+        updateCourse updateCourse = new updateCourseImpl();
+        String result = updateCourse.updateCourseInfo(course);
+        response.getWriter().print(result);
+      } else {
+        //新建
+        course.setCreate_time(dateFormart);
+        course.setUpdate_time(dateFormart);
+        course.setStatus(1);
 
-      SavceCourseService savceCourseService = new SavceCourseServiceImpl();
-      String s = savceCourseService.SavceCourseSalesInfo(course);
-      response.getWriter().print(s);
+        SavceCourseService savceCourseService = new SavceCourseServiceImpl();
+
+        String s = savceCourseService.SavceCourseSalesInfo(course);
+        response.getWriter().print(s);
+      }
+
     } catch (FileUploadException e) {
       e.printStackTrace();
     } catch (IllegalAccessException e) {

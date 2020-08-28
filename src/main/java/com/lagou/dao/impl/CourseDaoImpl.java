@@ -4,6 +4,7 @@ import com.lagou.dao.CourseDao;
 import com.lagou.pojo.Course;
 import com.lagou.utils.JdbcDruidUtil;
 import org.apache.commons.dbutils.QueryRunner;
+import org.apache.commons.dbutils.handlers.BeanHandler;
 import org.apache.commons.dbutils.handlers.BeanListHandler;
 
 import java.sql.SQLException;
@@ -18,6 +19,11 @@ public class CourseDaoImpl implements CourseDao {
 
   QueryRunner queryRunner = new QueryRunner(JdbcDruidUtil.getDataSource());
 
+  /**
+   * 查询所有
+   *
+   * @return
+   */
   @Override
   public List<Course> findCourseList() {
 
@@ -31,6 +37,13 @@ public class CourseDaoImpl implements CourseDao {
     }
   }
 
+  /**
+   * 根据名称和状态查询
+   *
+   * @param Coursename
+   * @param status
+   * @return
+   */
   @Override
   public List<Course> findCourseNameAndStatus(String Coursename, String status) {
 
@@ -52,6 +65,25 @@ public class CourseDaoImpl implements CourseDao {
       }
       List<Course> list1 = queryRunner.query(stringBuffer.toString(), new BeanListHandler<Course>(Course.class), list.toArray());
       return list1;
+    } catch (SQLException e) {
+      e.printStackTrace();
+      return null;
+    }
+  }
+
+  /**
+   * 根据ID进行查询
+   *
+   * @param id
+   * @return
+   */
+  @Override
+  public Course findById(int id) {
+    try {
+      String sql = "SELECT id,course_name,brief,teacher_name,teacher_info,preview_first_field,preview_second_field,discounts, price,price_tag,course_img_url,share_image_title,share_title,share_description,course_description,STATUS FROM course WHERE id = ?";
+
+      Course course = queryRunner.query(sql, new BeanHandler<Course>(Course.class));
+      return course;
     } catch (SQLException e) {
       e.printStackTrace();
       return null;
