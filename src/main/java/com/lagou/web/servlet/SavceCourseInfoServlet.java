@@ -4,7 +4,7 @@ import com.lagou.base.Constants;
 import com.lagou.pojo.Course;
 import com.lagou.service.SavceCourseService;
 import com.lagou.service.impl.SavceCourseServiceImpl;
-import com.lagou.service.impl.updateCourseImpl;
+import com.lagou.service.impl.UpdateCourseImpl;
 import com.lagou.service.updateCourse;
 import com.lagou.utils.DateUtils;
 import com.lagou.utils.UUIDUtils;
@@ -75,7 +75,7 @@ public class SavceCourseInfoServlet extends HttpServlet {
       if (map.get("id") != null) {
         //修改
         course.setCreate_time(dateFormart);
-        updateCourse updateCourse = new updateCourseImpl();
+        updateCourse updateCourse = new UpdateCourseImpl();
         String result = updateCourse.updateCourseInfo(course);
         response.getWriter().print(result);
       } else {

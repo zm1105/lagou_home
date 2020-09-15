@@ -6,12 +6,16 @@ import com.lagou.base.BaseServlet;
 import com.lagou.pojo.Course;
 import com.lagou.service.CourseService;
 import com.lagou.service.impl.CourseServiceImpl;
+import com.lagou.service.impl.UpdateCourseImpl;
+import com.lagou.service.updateCourse;
+import com.lagou.utils.DateUtils;
 
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author : zhoumin
@@ -51,10 +55,11 @@ public class CourseServlet extends BaseServlet {
       e.printStackTrace();
     }
   }
+
   /**
    * 根据课程ID查询
    */
-  public  void  ﬁndCourseById(HttpServletRequest request, HttpServletResponse response){
+  public void ﬁndCourseById(HttpServletRequest request, HttpServletResponse response) {
 
     try {
       String id = request.getParameter("id");
@@ -68,6 +73,36 @@ public class CourseServlet extends BaseServlet {
     } catch (IOException e) {
       e.printStackTrace();
     }
+  }
+
+  /**
+   * 修改课程状态
+   */
+  public void updateCourseStatus(HttpServletRequest request, HttpServletResponse response) {
+
+    try {
+      String id = request.getParameter("id");
+
+      updateCourse updateCourse = new UpdateCourseImpl();
+      Course courseId = courseService.findById(Integer.parseInt(id));
+
+      int status = courseId.getStatus();
+      if (status == 0) {
+        courseId.setStatus(1);
+      } else {
+        courseId.setStatus(0);
+      }
+
+      courseId.setUpdate_time(DateUtils.getDateFormart());
+      Map<String, Integer> map = updateCourse.updateCourseStatus(courseId);
+
+      String result = JSON.toJSONString(map);
+      response.getWriter().print(result);
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
+
 
   }
+
 }

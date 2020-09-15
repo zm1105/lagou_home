@@ -4,6 +4,8 @@ import com.alibaba.fastjson.annotation.JSONField;
 import lombok.Data;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * 课程章节
@@ -46,6 +48,10 @@ public class Course_Section implements Serializable {
   //是否删除 0-未删除，1-已删除
   @JSONField(ordinal = 9)
   private int isDel;
+
+  private  Course course;
+
+  List <Course_Lesson> CourseLessonlist = new ArrayList<>();
 
   @Override
   public String toString() {

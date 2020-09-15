@@ -13,4 +13,12 @@ import com.lagou.pojo.Course;
 public interface updateCourseDao {
 
   int updateCourseInfo(Course course);
+
+
+  /**
+   * 修改课程状态
+   * @param course
+   * @return
+   */
+   int updateCourseStatus(Course course);
 }

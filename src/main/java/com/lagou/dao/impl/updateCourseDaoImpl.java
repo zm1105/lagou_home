@@ -11,12 +11,14 @@ import java.sql.SQLException;
  * @author : zhoumin
  * @data :  2020/8/28 17:16
  */
-public class updateCourseImpl implements updateCourseDao {
+public class updateCourseDaoImpl implements updateCourseDao {
+  QueryRunner queryRunner = new QueryRunner(JdbcDruidUtil.getDataSource());
+
+
   @Override
   public int updateCourseInfo(Course course) {
 
     try {
-      QueryRunner queryRunner = new QueryRunner(JdbcDruidUtil.getDataSource());
 
       String sql = "UPDATE course SET course_name = ?,brief = ? ,teacher_name = ?,teacher_info = ?,preview_first_field = ?,preview_second_field = ?,discounts = ?,price = ?,price_tag = ?,share_image_title = ?,share_title = ?,share_description = ?,course_description = ?,course_img_url = ?,update_time = ? WHERE id = ?";
 
@@ -30,6 +32,20 @@ public class updateCourseImpl implements updateCourseDao {
     } catch (SQLException e) {
       e.printStackTrace();
       return 0;
+    }
+  }
+
+  @Override
+  public int updateCourseStatus(Course course) {
+    try {
+      String sql = "update coursu set status= ? , update_time =? where id= ?";
+      Object[] parms = {course.getStatus(), course.getUpdate_time(), course.getId()};
+      int row = queryRunner.update(sql, parms);
+      return row;
+    } catch (SQLException e) {
+      e.printStackTrace();
+      return 0;
+
     }
   }
 }

@@ -3,8 +3,9 @@ package com.lagou.pojo;
 import com.alibaba.fastjson.annotation.JSONField;
 import lombok.Data;
 
-
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * 课程类
@@ -92,6 +93,8 @@ public class Course implements Serializable {
   @JSONField(ordinal = 20)
   private String share_image_title; //分享图title
 
+
+  List<Course_Section> CourseSectionlist = new ArrayList<>();
 
   //使用JSONField(serialize = false)排除不需要转换的字段
 
