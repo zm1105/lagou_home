@@ -21,7 +21,7 @@ public class SavceCourseServiceImpl implements SavceCourseService {
     course.setStatus(1);
 
     SavceCourse savceCourse = new SavceCourseImpl();
-    int i = savceCourse.SavceCourseSalesInfo(course);
+    int i = savceCourse.savceCourseSalesInfo(course);
     if (i > 0) {
       String result = StatusCode.SUCCESS.toString();
       return result;

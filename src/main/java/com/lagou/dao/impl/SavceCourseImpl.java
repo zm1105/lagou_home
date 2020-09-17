@@ -20,7 +20,7 @@ public class SavceCourseImpl implements SavceCourse {
   QueryRunner queryRunner = new QueryRunner(JdbcDruidUtil.getDataSource());
 
   @Override
-  public int SavceCourseSalesInfo(Course course) {
+  public int savceCourseSalesInfo(Course course) {
     try {
       String sql = "INSERT INTO course(course_name,brief,teacher_name,teacher_info,preview_first_field,preview_second_field,discounts,price,price_tag,share_image_title,share_title,share_description,course_description,course_img_url,STATUS,create_time,update_time)VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 
