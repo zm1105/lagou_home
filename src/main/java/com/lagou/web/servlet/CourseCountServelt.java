@@ -69,7 +69,6 @@ public class CourseCountServelt extends BaseServlet {
         String s = findCourseContentService.savceCoursecontent(course_section);
         response.getWriter().print(s);
       } else {
-
         //修改
         String s = findCourseContentService.updateCourseSection(course_section);
         response.getWriter().print(s);
