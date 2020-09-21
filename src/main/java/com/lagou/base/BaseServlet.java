@@ -59,7 +59,6 @@ public class BaseServlet extends HttpServlet {
     doGet(req, resp);
   }
 
-
   /**
    * post 请求格式为json  使用该方法读取
    */
