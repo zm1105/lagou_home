@@ -41,13 +41,11 @@ public class BaseServlet extends HttpServlet {
       try {
         //1.获取字节码文件对象
         Class c = this.getClass();
-
         //2.根据传入的方法名,获取对应的方法对象  findByName
         Method method = c.getMethod(methodName, HttpServletRequest.class, HttpServletResponse.class);
 
         //3.调用method对象的 invoke方法,执行对应的功能
         method.invoke(this, req, resp);
-
       } catch (Exception e) {
         e.printStackTrace();
         System.out.println("请求的功能不存在!!");
