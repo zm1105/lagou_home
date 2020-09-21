@@ -34,7 +34,6 @@ public class BaseServlet extends HttpServlet {
       methodName = req.getParameter("methodName");
     }
 
-
     //2.判断 执行对应的方法
     if (methodName != null) {
       //通过反射优化代码 提升代码的可维护性
