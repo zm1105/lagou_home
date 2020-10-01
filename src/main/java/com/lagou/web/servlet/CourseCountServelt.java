@@ -3,17 +3,21 @@ package com.lagou.web.servlet;
 import com.alibaba.fastjson.JSON;
 import com.lagou.base.BaseServlet;
 import com.lagou.pojo.Course;
+import com.lagou.pojo.Course_Lesson;
 import com.lagou.pojo.Course_Section;
 import com.lagou.service.CourseCountService;
+import com.lagou.service.findCourseContentService;
 import com.lagou.service.impl.CourseCountServiceImpl;
 import com.lagou.service.impl.findCourseContentServiceImpl;
-import com.lagou.service.findCourseContentService;
+import com.lagou.service.impl.saveOrUpdateLessonServiceImpl;
+import com.lagou.service.saveOrUpdateLessonService;
 import org.apache.commons.beanutils.BeanUtils;
 
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 import java.util.Map;
 
@@ -88,6 +92,33 @@ public class CourseCountServelt extends BaseServlet {
       String s = findCourseContentService.updateSectionStatus(id, status);
       response.getWriter().print(s);
     } catch (Exception e) {
+      e.printStackTrace();
+    }
+  }
+
+
+  public void saveOrUpdateLesson(HttpServletRequest request, HttpServletResponse response) {
+    try {
+      Map<String, Object> map = (Map) request.getAttribute("map");
+
+      Course_Lesson course_lesson = new Course_Lesson();
+      BeanUtils.populate(course_lesson, map);
+      saveOrUpdateLessonService saveOrUpdateLessonService = new saveOrUpdateLessonServiceImpl();
+
+      if (course_lesson.getId() == 0) {
+        //新增
+        String s = saveOrUpdateLessonService.saveLessonService(course_lesson);
+        response.getWriter().print(s);
+      } else {
+        //修改
+        String s = saveOrUpdateLessonService.UpdateLesson(course_lesson);
+        response.getWriter().print(s);
+      }
+    } catch (IllegalAccessException e) {
+      e.printStackTrace();
+    } catch (InvocationTargetException e) {
+      e.printStackTrace();
+    } catch (IOException e) {
       e.printStackTrace();
     }
   }

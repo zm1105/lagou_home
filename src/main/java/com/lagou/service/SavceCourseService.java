@@ -8,6 +8,6 @@ import com.lagou.pojo.Course;
  */
 public interface SavceCourseService {
 
-  public  String SavceCourseSalesInfo(Course course);
+    String SavceCourseSalesInfo(Course course);
 
 }

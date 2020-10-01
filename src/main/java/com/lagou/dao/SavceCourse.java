@@ -7,5 +7,5 @@ import com.lagou.pojo.Course;
  * @data :  2020/8/27 10:42
  */
 public interface SavceCourse {
-   public  int savceCourseSalesInfo(Course course);
+  int savceCourseSalesInfo(Course course);
 }
