@@ -38,14 +38,13 @@ public class updateCourseDaoImpl implements updateCourseDao {
   @Override
   public int updateCourseStatus(Course course) {
     try {
-      String sql = "update coursu set status= ? , update_time =? where id= ?";
+      String sql = "update course set status= ? , update_time =? where id= ?";
       Object[] parms = {course.getStatus(), course.getUpdate_time(), course.getId()};
       int row = queryRunner.update(sql, parms);
       return row;
     } catch (SQLException e) {
       e.printStackTrace();
       return 0;
-
     }
   }
 }
