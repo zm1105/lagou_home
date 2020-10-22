@@ -18,11 +18,11 @@ public class findCourseContentDaoImpl implements findCourseContentDao {
   QueryRunner queryRunner = new QueryRunner(JdbcDruidUtil.getDataSource());
 
   @Override
-  public Course findCourseById(int courseid) {
+  public Course findCourseById(int id) {
     try {
       String sql = "SELECT id,course_name FROM course where id = ? ";
 
-      Course courseList = queryRunner.query(sql, new BeanHandler<Course>(Course.class), courseid);
+      Course courseList = queryRunner.query(sql, new BeanHandler<Course>(Course.class), id);
       return courseList;
     } catch (SQLException e) {
       e.printStackTrace();

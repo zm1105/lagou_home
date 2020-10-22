@@ -26,15 +26,15 @@ import java.util.Map;
 public class CourseServlet extends BaseServlet {
 
   CourseService courseService = new CourseServiceImpl();
-  SimplePropertyPreFilter filter = new SimplePropertyPreFilter(Course.class, "id", "course_name"
-      , "price", "sort_num", "status");
+//  SimplePropertyPreFilter filter = new SimplePropertyPreFilter(Course.class, "id", "course_name"
+//      , "price", "sort_num", "status");
 
   public void findCourseList(HttpServletRequest request, HttpServletResponse response) {
 
     try {
       List<Course> courseList = courseService.findCourseList();
 
-      String s = JSON.toJSONString(courseList, filter);
+      String s = JSON.toJSONString(courseList);
       response.getWriter().print(s);
     } catch (IOException e) {
       e.printStackTrace();
@@ -49,7 +49,7 @@ public class CourseServlet extends BaseServlet {
       List<Course> courseNameAndStatus = courseService.findCourseNameAndStatus(course_name, status);
 
 
-      String s = JSON.toJSONString(courseNameAndStatus, filter);
+      String s = JSON.toJSONString(courseNameAndStatus);
       response.getWriter().print(s);
     } catch (IOException e) {
       e.printStackTrace();
@@ -59,11 +59,10 @@ public class CourseServlet extends BaseServlet {
   /**
    * 根据课程ID查询
    */
-  public void ﬁndCourseById(HttpServletRequest request, HttpServletResponse response) {
+  public void findCourseById(HttpServletRequest request, HttpServletResponse response) {
 
     try {
       String id = request.getParameter("id");
-
       CourseService courseService = new CourseServiceImpl();
       Course course = courseService.findById(Integer.parseInt(id));
 

@@ -37,21 +37,19 @@ public class BaseServlet extends HttpServlet {
     //2.判断 执行对应的方法
     if (methodName != null) {
       //通过反射优化代码 提升代码的可维护性
-
       try {
         //1.获取字节码文件对象
         Class c = this.getClass();
         //2.根据传入的方法名,获取对应的方法对象  findByName
         Method method = c.getMethod(methodName, HttpServletRequest.class, HttpServletResponse.class);
-
+        System.out.println(method);
         //3.调用method对象的 invoke方法,执行对应的功能
         method.invoke(this, req, resp);
       } catch (Exception e) {
         e.printStackTrace();
-        System.out.println("请求的功能不存在!!");
+        System.out.println("qing qiu gong neng  bu cun zai !!");
       }
     }
-
   }
 
   @Override

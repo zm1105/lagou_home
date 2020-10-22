@@ -81,7 +81,6 @@ public class CourseDaoImpl implements CourseDao {
   public Course findById(int id) {
     try {
       String sql = "SELECT id,course_name,brief,teacher_name,teacher_info,preview_first_field,preview_second_field,discounts, price,price_tag,course_img_url,share_image_title,share_title,share_description,course_description,STATUS FROM course WHERE id = ?";
-
       Course course = queryRunner.query(sql, new BeanHandler<Course>(Course.class),id);
       return course;
     } catch (SQLException e) {

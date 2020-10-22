@@ -8,7 +8,7 @@ import com.lagou.pojo.Course;
  */
 
 /**
- * 修改信息
+ * 修改课程营销信息
  */
 public interface updateCourseDao {
 

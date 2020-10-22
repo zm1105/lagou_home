@@ -11,10 +11,10 @@ public interface findCourseContentDao {
 
   /**
    * 回显课程
-   * @param courseid
+   * @param id
    * @return
    */
-  Course findCourseById(int courseid);
+  Course findCourseById(int id);
 
   /**
    * 保存章节
