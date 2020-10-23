@@ -19,5 +19,13 @@ public interface findCourseContentService {
 
   String updateSectionStatus(int id ,int status);
 
+  /**
+   * 修改课时状态
+   * @param
+   * @return
+   */
+  String updateLessonStatus(int id ,int status);
+
+
 
 }

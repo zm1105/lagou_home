@@ -123,4 +123,23 @@ public class CourseCountServelt extends BaseServlet {
       e.printStackTrace();
     }
   }
+
+
+  /**
+   * 修改课时状态
+   * @param request
+   * @param response
+   */
+  public void updateLessonStatus(HttpServletRequest request, HttpServletResponse response) {
+    try {
+      int id = Integer.parseInt(request.getParameter("id"));
+      int status = Integer.parseInt(request.getParameter("status"));
+
+      findCourseContentService findCourseContentService = new findCourseContentServiceImpl();
+      String s = findCourseContentService.updateLessonStatus(id, status);
+      response.getWriter().print(s);
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
+  }
 }

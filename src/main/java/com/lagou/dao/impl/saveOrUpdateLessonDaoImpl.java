@@ -2,6 +2,7 @@ package com.lagou.dao.impl;
 
 import com.lagou.dao.saveOrUpdateLessonDao;
 import com.lagou.pojo.Course_Lesson;
+import com.lagou.utils.DateUtils;
 import com.lagou.utils.JdbcDruidUtil;
 import org.apache.commons.dbutils.QueryRunner;
 
@@ -47,6 +48,28 @@ public class saveOrUpdateLessonDaoImpl implements saveOrUpdateLessonDao {
       int row = queryRunner.update(sql, parms);
 
       return row;
+    } catch (SQLException e) {
+      e.printStackTrace();
+      return 0;
+    }
+  }
+
+
+  /**
+   * 修改课时状态
+   * @param id
+   * @param status
+   * @return
+   */
+  @Override
+  public int updateLessonStatusDao(int id, int status) {
+    try {
+      String sql = "update course_lesson set status=? ,update_time=? where id=?";
+      Object [] parms = {status, DateUtils.getDateFormart(), id};
+
+      int row = queryRunner.update(sql, parms);
+
+      return  row;
     } catch (SQLException e) {
       e.printStackTrace();
       return 0;

@@ -19,4 +19,13 @@ public interface saveOrUpdateLessonDao {
 
  int saveLessonDao(Course_Lesson lesson);
 
+
+  /**
+   * 修改课时状态
+   * @param id
+   * @param status
+   * @return
+   */
+ int updateLessonStatusDao(int id ,int status);
+
 }

@@ -1,8 +1,10 @@
 package com.lagou.service.impl;
 
 import com.lagou.base.StatusCode;
-import com.lagou.dao.impl.findCourseContentDaoImpl;
 import com.lagou.dao.findCourseContentDao;
+import com.lagou.dao.impl.findCourseContentDaoImpl;
+import com.lagou.dao.impl.saveOrUpdateLessonDaoImpl;
+import com.lagou.dao.saveOrUpdateLessonDao;
 import com.lagou.pojo.Course;
 import com.lagou.pojo.Course_Section;
 import com.lagou.service.findCourseContentService;
@@ -65,6 +67,19 @@ public class findCourseContentServiceImpl implements findCourseContentService {
   public String updateSectionStatus(int id, int status) {
 
     int i = updateCourseContentDao.updateSectionStatus(id, status);
+    if (i > 0) {
+      String s = StatusCode.SUCCESS.toString();
+      return s;
+    } else {
+      String s = StatusCode.FAIL.toString();
+      return s;
+    }
+  }
+
+  @Override
+  public String updateLessonStatus(int id, int status) {
+    saveOrUpdateLessonDao saveOrUpdateLessonDao = new saveOrUpdateLessonDaoImpl();
+    int i = saveOrUpdateLessonDao.updateLessonStatusDao(id, status);
     if (i > 0) {
       String s = StatusCode.SUCCESS.toString();
       return s;
