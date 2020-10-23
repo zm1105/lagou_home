@@ -25,7 +25,7 @@ public class BaseServlet extends HttpServlet {
     //1.获取参数 要访问的方法名
     String methodName = null;
     String ContentType = req.getHeader("Content-Type");
-    if ("application/json;charset=utf-8".equals(ContentType)) {
+    if ("application/json;charset=utf-8".equalsIgnoreCase(ContentType)) {
       String postJson = getPostJson(req);
       Map map = JSON.parseObject(postJson, Map.class);
       methodName = (String) map.get("methodName");

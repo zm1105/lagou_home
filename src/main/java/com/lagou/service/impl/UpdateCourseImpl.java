@@ -4,7 +4,7 @@ import com.lagou.base.StatusCode;
 import com.lagou.dao.impl.updateCourseDaoImpl;
 import com.lagou.dao.updateCourseDao;
 import com.lagou.pojo.Course;
-import com.lagou.service.updateCourse;
+import com.lagou.service.updateCourseService;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -13,7 +13,7 @@ import java.util.Map;
  * @author : zhoumin
  * @data :  2020/8/28 17:27
  */
-public class UpdateCourseImpl implements updateCourse {
+public class UpdateCourseImpl implements updateCourseService {
 
 
   updateCourseDao updateCourseDao = new updateCourseDaoImpl();

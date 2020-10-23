@@ -8,7 +8,7 @@ import java.util.Map;
  * @author : zhoumin
  * @data :  2020/8/28 17:24
  */
-public interface updateCourse {
+public interface updateCourseService {
 
   String updateCourseInfo(Course course);
 

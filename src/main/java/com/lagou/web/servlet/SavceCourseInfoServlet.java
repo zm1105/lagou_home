@@ -5,7 +5,7 @@ import com.lagou.pojo.Course;
 import com.lagou.service.SavceCourseService;
 import com.lagou.service.impl.SavceCourseServiceImpl;
 import com.lagou.service.impl.UpdateCourseImpl;
-import com.lagou.service.updateCourse;
+import com.lagou.service.updateCourseService;
 import com.lagou.utils.DateUtils;
 import com.lagou.utils.UUIDUtils;
 import org.apache.commons.beanutils.BeanUtils;
@@ -38,7 +38,6 @@ public class SavceCourseInfoServlet extends HttpServlet {
   protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     try {
       Course course = new Course();
-
       Map<String, Object> map = new HashMap<>();
       DiskFileItemFactory factory = new DiskFileItemFactory();
       ServletFileUpload upload = new ServletFileUpload(factory);
@@ -49,14 +48,11 @@ public class SavceCourseInfoServlet extends HttpServlet {
         // 普通表单
         if (formField) {
           String fieldName = fileItem.getFieldName();
-          String string = fileItem.getString("utf-8");
-          map.put(fieldName, string);
-
+          String  value= fileItem.getString("utf-8");
+          map.put(fieldName, value);
         } else {        //文件上传
-
           String fieldName = fileItem.getFieldName();
           String newname = UUIDUtils.getUUID() + "_" + fieldName;
-
 
           InputStream inputStream = fileItem.getInputStream();
           String realPath = this.getServletContext().getRealPath("/");
@@ -72,10 +68,13 @@ public class SavceCourseInfoServlet extends HttpServlet {
 
       BeanUtils.populate(course, map);
       String dateFormart = DateUtils.getDateFormart();
+      updateCourseService updateCourse = new UpdateCourseImpl();
+
+      System.out.println("huoqu"+course);
       if (map.get("id") != null) {
+        System.out.println("8888888888888");
         //修改
         course.setCreate_time(dateFormart);
-        updateCourse updateCourse = new UpdateCourseImpl();
         String result = updateCourse.updateCourseInfo(course);
         response.getWriter().print(result);
       } else {
@@ -85,7 +84,6 @@ public class SavceCourseInfoServlet extends HttpServlet {
         course.setStatus(1);
 
         SavceCourseService savceCourseService = new SavceCourseServiceImpl();
-
         String s = savceCourseService.SavceCourseSalesInfo(course);
         response.getWriter().print(s);
       }

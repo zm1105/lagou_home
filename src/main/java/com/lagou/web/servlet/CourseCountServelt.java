@@ -64,17 +64,18 @@ public class CourseCountServelt extends BaseServlet {
     try {
       Map<String, Object> map = (Map) request.getAttribute("map");
 
-      Course_Section course_section = new Course_Section();
+      Course_Section section = new Course_Section();
 
-      BeanUtils.populate(course_section, map);
+      //BeanUtils.populate(course_section, map);
+      BeanUtils.copyProperties(section,map.get("section"));
       findCourseContentService findCourseContentService = new findCourseContentServiceImpl();
-      if (course_section.getId() == 0) {
+      if (section.getId() == 0) {
         //新增
-        String s = findCourseContentService.savceCoursecontent(course_section);
+        String s = findCourseContentService.savceCoursecontent(section);
         response.getWriter().print(s);
       } else {
         //修改
-        String s = findCourseContentService.updateCourseSection(course_section);
+        String s = findCourseContentService.updateCourseSection(section);
         response.getWriter().print(s);
       }
 

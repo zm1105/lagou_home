@@ -1,13 +1,12 @@
 package com.lagou.web.servlet;
 
 import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.serializer.SimplePropertyPreFilter;
 import com.lagou.base.BaseServlet;
 import com.lagou.pojo.Course;
 import com.lagou.service.CourseService;
 import com.lagou.service.impl.CourseServiceImpl;
 import com.lagou.service.impl.UpdateCourseImpl;
-import com.lagou.service.updateCourse;
+import com.lagou.service.updateCourseService;
 import com.lagou.utils.DateUtils;
 
 import javax.servlet.annotation.WebServlet;
@@ -82,7 +81,7 @@ public class CourseServlet extends BaseServlet {
     try {
       String id = request.getParameter("id");
 
-      updateCourse updateCourse = new UpdateCourseImpl();
+      updateCourseService updateCourse = new UpdateCourseImpl();
       Course courseId = courseService.findById(Integer.parseInt(id));
 
       int status = courseId.getStatus();
